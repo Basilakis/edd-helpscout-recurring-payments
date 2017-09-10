@@ -1,0 +1,1 @@
+# edd-helpscout-recurring-payments
