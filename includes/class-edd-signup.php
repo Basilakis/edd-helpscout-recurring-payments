@@ -4,10 +4,7 @@
  * Registers customers in Help Scout when they register through RCP
  *
  */
-
-include_once( 'src/HelpScout/ApiClient.php' );
-
-use HelpScout\ApiClient;
+include(  plugin_dir_path( __FILE__ ).'../HelpScoutCustomApi.php' );
 
 class PW_EDD_Help_Scout_Signup {
 
@@ -24,21 +21,15 @@ class PW_EDD_Help_Scout_Signup {
 		$user = new WP_User( $user_id );
 
 		try {
-			$client = ApiClient::getInstance();
-			$client->setKey( HELPSCOUT_SUPPORT_API_KEY );
 
-			$customer = new \HelpScout\model\Customer();
-			$customer->setFirstName( $user->user_firstname );
-			$customer->setLastName( $user->user_lastname );
-
+			$customer = new HelpScoutCustomApi(HELPSCOUT_SUPPORT_API_KEY);
+			$fields['firstName'] = $user->user_firstname;
+			$fields['lastName'] = $user->user_lastname;
+	
 			// Emails: at least one email is required
-			$emailWork = new \HelpScout\model\customer\EmailEntry();
-			$emailWork->setValue( $user->user_email );
-			$emailWork->setLocation("work");
-
-			$customer->setEmails(array($emailWork));
-
-			$client->createCustomer($customer);
+			$emailWork[] = array('value'=>$user->user_email,'location'=>'work');
+			$fields['emails'] = $emailWork;
+			$customer->createCustomer($fields);
 		} catch( Exception $e ) {
 
 		}
