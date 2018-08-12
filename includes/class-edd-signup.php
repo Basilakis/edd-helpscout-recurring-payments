@@ -4,6 +4,7 @@
  * Registers customers in Help Scout when they register through RCP
  *
  */
+include plugin_dir_path(__FILE__) . '../config.php';
 include plugin_dir_path(__FILE__) . '../HelpScoutCustomApi.php';
 
 class PW_EDD_Help_Scout_Signup
@@ -35,8 +36,8 @@ class PW_EDD_Help_Scout_Signup
                 $fields['lastName'] = $user->user_lastname;
                 $response = $customer->createCustomer($fields);
 
-                if (isset($response['Resource-ID'])) {
-                    $customerid = $response['Resource-ID'];
+                if (isset($response['resource-id'])) {
+                    $customerid = $response['resource-id'];
                     $customer['type'] = 'work';
                     $customer['value'] = $user->user_email;
                     $objhelp->createEmail($customerid, $customer);
