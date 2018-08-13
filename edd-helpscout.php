@@ -19,7 +19,6 @@ class EDD_Help_Scout {
 
 	public function __construct() {
 		$this->file         = __FILE__;
-
 		$this->basename     = plugin_basename( $this->file );
 		$this->plugin_dir   = plugin_dir_path( $this->file );
 		$this->plugin_url   = plugin_dir_url ( $this->file );
@@ -29,7 +28,6 @@ class EDD_Help_Scout {
 
 		include( 'includes/class-edd-signup.php' );
 		include( 'includes/class-edd-helpscout-customer.php' );
-
 	}
 
 }
