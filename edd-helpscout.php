@@ -12,7 +12,7 @@ Text Domain: edd-helpscout
 Domain Path: /languages
 */
 
-class RCP_Help_Scout {
+class EDD_Help_Scout {
 
 	public $plugin_dir;
 	public $plugin_url;
@@ -34,4 +34,4 @@ class RCP_Help_Scout {
 
 }
 
-new RCP_Help_Scout;
+new EDD_Help_Scout;
